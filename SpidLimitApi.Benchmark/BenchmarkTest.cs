@@ -1,5 +1,4 @@
-﻿
-using SpeedLimitApi.Controllers;
+﻿using SpeedLimitApi.Controllers;
 using SpeedLimitApi.Models;
 using SpeedLimitApi.Repositories;
 using System;
@@ -15,9 +14,9 @@ namespace SpeedLimitApi.Test
     {
         private static SpeedLimitController controller = new SpeedLimitController();
         private static CarSpeedRepository carSpeedRepository = new CarSpeedRepository();
-        private static List<CarSpeed> carSpeeds = new List<CarSpeed>{ new CarSpeed("9587-HT8", 71.0F, DateTime.Now),
-            new CarSpeed("9567-HT8", 100.0F, DateTime.Now), new CarSpeed("9907-MK8", 15.0F, DateTime.Now),
-            new CarSpeed("9887-TH8", 47.0F, DateTime.Now) };
+        private static List<CarSpeed> carSpeeds = new List<CarSpeed>{ new CarSpeed("9587-HT8".ToCharArray(), 71.0F, DateTime.Now),
+            new CarSpeed("9567-HT8".ToCharArray(), 100.0F, DateTime.Now), new CarSpeed("9907-MK8".ToCharArray(), 15.0F, DateTime.Now),
+            new CarSpeed("9887-TH8".ToCharArray(), 47.0F, DateTime.Now) };
         static void Main(string[] args)
         {
             carSpeedRepository.DeleteFile(DateOnly.FromDateTime(DateTime.Now));

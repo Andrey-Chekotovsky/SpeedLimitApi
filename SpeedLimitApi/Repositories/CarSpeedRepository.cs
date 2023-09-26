@@ -39,6 +39,7 @@ namespace SpeedLimitApi.Repositories
         {
             string path = CreatePath(carSpeeds[0].RegisteredAt);
             var str = JsonSerializer.Serialize(carSpeeds);
+            Console.WriteLine(str[0]);
             str = str.Remove(0, 1);
             Console.WriteLine(str[0]);
             str = str.Remove(str.Length - 1, 1);
@@ -71,6 +72,7 @@ namespace SpeedLimitApi.Repositories
         {
             string path = CreatePath(date);
             var carSpeeds = new List<CarSpeed>();
+
             using (StreamReader stream = new StreamReader(path))
             {
                 string str = "[" + stream.ReadToEnd() + "]";
@@ -79,6 +81,20 @@ namespace SpeedLimitApi.Repositories
             carSpeeds.Sort();
 
             return (carSpeeds[0], carSpeeds[carSpeeds.Count - 1]);
+        }
+        public List<CarSpeed> uploadAllFromFile(DateOnly date)
+        {
+            string path = CreatePath(date);
+            var carSpeeds = new List<CarSpeed>();
+            if (File.Exists(path))
+            {
+                using (StreamReader stream = new StreamReader(path))
+                {
+                    string str = "[" + stream.ReadToEnd() + "]";
+                    carSpeeds = JsonSerializer.Deserialize<List<CarSpeed>>(str);
+                }
+            }
+            return carSpeeds;
         }
         public void DeleteFile(DateOnly date)
         {

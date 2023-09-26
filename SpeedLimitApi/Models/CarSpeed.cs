@@ -1,4 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using System.Drawing;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json.Serialization;
 
 namespace SpeedLimitApi.Models
@@ -6,12 +9,14 @@ namespace SpeedLimitApi.Models
     [Serializable]
     public class CarSpeed : IComparable<CarSpeed>
     {
-        [JsonPropertyName("carNumber")]
-        private string carNumber;
         [JsonPropertyName("speed")]
         private float speed;
+        [JsonPropertyName("carNumber")]
+        private char[] carNumber = new char[8];
         [JsonPropertyName("registeredAt")]
         private DateTime registeredAt;
+        [NonSerialized]
+        public static readonly int Size = 205; 
         public CarSpeed()
         {
 }
@@ -19,19 +24,20 @@ namespace SpeedLimitApi.Models
         {
             this.speed = speed;
             this.registeredAt = DateTime.Now;
-            this.carNumber = "0000-OO0";
+            this.carNumber = "0000-OO0".ToCharArray();
         }
 
-        public CarSpeed(string carNumber, float speed, DateTime registeredAt)
+        public CarSpeed(char[] carNumber, float speed, DateTime registeredAt)
         {
             this.carNumber = carNumber;
             this.speed = speed;
             this.registeredAt = registeredAt;
         }
 
-        public string CarNumber { get { return carNumber; } set { carNumber = value; } }
+        public char[] CarNumber { get { return carNumber; } set { carNumber = value; } }
         public float Speed { get { return speed; } set { speed = value; } }
         public DateTime RegisteredAt { get {  return registeredAt; } set {  registeredAt = value; } }
+
 
         public int CompareTo(CarSpeed? other)
         {

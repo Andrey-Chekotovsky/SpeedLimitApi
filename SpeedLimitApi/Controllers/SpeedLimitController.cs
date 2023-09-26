@@ -18,18 +18,21 @@ namespace SpeedLimitApi.Controllers
             timer.Start();
             timer.Elapsed += OnTimedEvent;
         }
-        public void addAndSort()
+        public static  void addCarSpeeds()
         {
-
+            if (carSpeeds.Count != 0)
+            {
+                //carSpeeds.AddRange(carSpeedRepository.uploadAllFromFile(DateOnly.FromDateTime(carSpeeds[0].RegisteredAt)));
+                //carSpeedRepository.DeleteFile(DateOnly.FromDateTime(carSpeeds[0].RegisteredAt));
+                //carSpeeds.Sort();
+                carSpeedRepository.WriteCarSpeedWithOneDate(carSpeeds);
+                carSpeeds = new List<CarSpeed>();
+            }
         }
         private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             Console.WriteLine(":)");
-            if (carSpeeds.Count != 0)
-            {
-                carSpeedRepository.WriteCarSpeedWithOneDate(carSpeeds);
-                carSpeeds = new List<CarSpeed>();
-            }
+            addCarSpeeds();
         }
         [Route("getSpeedLimitIntruders")]
         [HttpGet]
@@ -37,11 +40,7 @@ namespace SpeedLimitApi.Controllers
             [FromQuery(Name = "speed")] float speed)
         {
             DateOnly date;
-            if (carSpeeds.Count != 0)
-            {
-                carSpeedRepository.WriteCarSpeedWithOneDate(carSpeeds);
-                carSpeeds = new List<CarSpeed>();
-            }
+            addCarSpeeds();
             try {
                 date = DateOnly.Parse(strDate);
             }
@@ -59,11 +58,7 @@ namespace SpeedLimitApi.Controllers
         public string GetMinAndMax([FromQuery(Name = "date")] string strDate)
         {
             DateOnly date;
-            if (carSpeeds.Count != 0)
-            {
-                carSpeedRepository.WriteCarSpeedWithOneDate(carSpeeds);
-                carSpeeds = new List<CarSpeed>();
-            }
+            addCarSpeeds();
             try
             {
                 date = DateOnly.Parse(strDate);
