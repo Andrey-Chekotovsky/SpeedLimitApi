@@ -19,7 +19,6 @@ namespace SpeedLimitApi.Test
             new CarSpeed("9887-TH8", 47.0F, DateTime.Now) };
         static void Main(string[] args)
         {
-            carSpeedRepository.DeleteFile(DateOnly.FromDateTime(DateTime.Now));
             Stopwatch stopwatch = new Stopwatch();
             Console.WriteLine("Method: PostCarSpeed");
             stopwatch.Start();

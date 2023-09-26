@@ -76,9 +76,7 @@ namespace SpeedLimitApi.Repositories
                 string str = "[" + stream.ReadToEnd() + "]";
                 carSpeeds = JsonSerializer.Deserialize<List<CarSpeed>>(str);
             }
-            carSpeeds.Sort();
-
-            return (carSpeeds[0], carSpeeds[carSpeeds.Count - 1]);
+            return (carSpeeds.Min(), carSpeeds.Max());
         }
         public List<CarSpeed> uploadAllFromFile(DateOnly date)
         {
