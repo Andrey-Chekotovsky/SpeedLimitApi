@@ -12,7 +12,7 @@ namespace SpeedLimitApi.Models
         [JsonPropertyName("speed")]
         private float speed;
         [JsonPropertyName("carNumber")]
-        private char[] carNumber = new char[8];
+        private string carNumber;
         [JsonPropertyName("registeredAt")]
         private DateTime registeredAt;
         [NonSerialized]
@@ -24,17 +24,17 @@ namespace SpeedLimitApi.Models
         {
             this.speed = speed;
             this.registeredAt = DateTime.Now;
-            this.carNumber = "0000-OO0".ToCharArray();
+            this.carNumber = "0000-OO0";
         }
 
-        public CarSpeed(char[] carNumber, float speed, DateTime registeredAt)
+        public CarSpeed(string carNumber, float speed, DateTime registeredAt)
         {
             this.carNumber = carNumber;
             this.speed = speed;
             this.registeredAt = registeredAt;
         }
 
-        public char[] CarNumber { get { return carNumber; } set { carNumber = value; } }
+        public string CarNumber { get { return carNumber; } set { carNumber = value; } }
         public float Speed { get { return speed; } set { speed = value; } }
         public DateTime RegisteredAt { get {  return registeredAt; } set {  registeredAt = value; } }
 

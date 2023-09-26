@@ -11,9 +11,9 @@ namespace SpeedLimitApi.Test
     {
         private SpeedLimitController controller = new SpeedLimitController();
         private CarSpeedRepository carSpeedRepository = new CarSpeedRepository();
-        private List<CarSpeed> carSpeeds = new List<CarSpeed>{ new CarSpeed("9587-HT8".ToCharArray(), 71.0F, DateTime.Now),
-            new CarSpeed("9567-HT8".ToCharArray(), 100.0F, DateTime.Now), new CarSpeed("9907-MK8".ToCharArray(), 15.0F, DateTime.Now),
-            new CarSpeed("9887-TH8".ToCharArray(), 47.0F, DateTime.Now) };
+        private List<CarSpeed> carSpeeds = new List<CarSpeed>{ new CarSpeed("9587-HT8", 71.0F, DateTime.Now),
+            new CarSpeed("9567-HT8", 100.0F, DateTime.Now), new CarSpeed("9907-MK8", 15.0F, DateTime.Now),
+            new CarSpeed("9887-TH8", 47.0F, DateTime.Now) };
         public SpeedLimitControllerTesr()
         {
             carSpeedRepository.DeleteFile(DateOnly.FromDateTime(DateTime.Now));
@@ -34,13 +34,6 @@ namespace SpeedLimitApi.Test
         {
             string rez = controller.getSpeedLimitIntruders(DateOnly.FromDateTime(DateTime.Now).ToString(), 90.0F);
             var list = JsonSerializer.Deserialize<List<CarSpeed>>(rez);
-            if (carSpeeds[1].Equals(list[0])) {
-                Console.WriteLine("true");
-            }
-            if (carSpeeds[1].GetHashCode() == list[0].GetHashCode())
-            {
-                Console.WriteLine("true");
-            }
             Assert.True(carSpeeds[1].Equals(list[0]));
         }
         [Fact]
