@@ -13,10 +13,12 @@ namespace SpeedLimitApi.Controllers
         private static readonly CarSpeedRepository carSpeedRepository = new CarSpeedRepository();
         private System.Timers.Timer timer = new System.Timers.Timer(10000);
         private static List<CarSpeed> carSpeeds = new List<CarSpeed>();
+        private static int day;
         public SpeedLimitController()
         {
             timer.Start();
             timer.Elapsed += OnTimedEvent;
+            day = DateTime.Now.Day;
         }
         public static  void addCarSpeeds()
         {
@@ -78,6 +80,8 @@ namespace SpeedLimitApi.Controllers
         [HttpPost]
         public void PostCarSpeed([FromBody] CarSpeed carSpeed)
         {
+            if (day != DateTime.Now.Day)
+                addCarSpeeds();
             carSpeeds.Add(carSpeed);
         }
     }
