@@ -39,9 +39,7 @@ namespace SpeedLimitApi.Repositories
         {
             string path = CreatePath(carSpeeds[0].RegisteredAt);
             var str = JsonSerializer.Serialize(carSpeeds);
-            Console.WriteLine(str[0]);
             str = str.Remove(0, 1);
-            Console.WriteLine(str[0]);
             str = str.Remove(str.Length - 1, 1);
             if (File.Exists(path))
             {

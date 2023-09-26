@@ -37,8 +37,13 @@ namespace SpeedLimitApi.Test
                 controller.PostCarSpeed(carSpeeds[2]);
                 controller.PostCarSpeed(carSpeeds[3]);
             }
-
-            System.Threading.Thread.Sleep(100);
+            stopwatch.Stop();
+            rezult = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine("Time: " + rezult);
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Method: GetMinAndMax");
+            stopwatch.Restart();
+            controller.GetMinAndMax(DateOnly.FromDateTime(DateTime.Now).ToString());
             stopwatch.Stop();
             rezult = stopwatch.ElapsedMilliseconds;
             Console.WriteLine("Time: " + rezult);

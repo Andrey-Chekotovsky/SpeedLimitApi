@@ -24,9 +24,6 @@ namespace SpeedLimitApi.Controllers
         {
             if (carSpeeds.Count != 0)
             {
-                //carSpeeds.AddRange(carSpeedRepository.uploadAllFromFile(DateOnly.FromDateTime(carSpeeds[0].RegisteredAt)));
-                //carSpeedRepository.DeleteFile(DateOnly.FromDateTime(carSpeeds[0].RegisteredAt));
-                //carSpeeds.Sort();
                 carSpeedRepository.WriteCarSpeedWithOneDate(carSpeeds);
                 carSpeeds = new List<CarSpeed>();
             }
