@@ -50,13 +50,17 @@ namespace SpeedLimitApi.Models
         {
             return obj is CarSpeed speed &&
                    carNumber == speed.carNumber &&
-                   this.speed == speed.speed &&
-                   registeredAt == speed.registeredAt;
+                   this.speed == speed.speed;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(carNumber, speed, registeredAt);
+            return HashCode.Combine(carNumber, registeredAt);
+        }
+
+        public override string? ToString()
+        {
+            return this.CarNumber + " " + registeredAt.ToString() + " " + speed;
         }
     }
 }

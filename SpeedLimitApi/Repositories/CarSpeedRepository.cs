@@ -39,7 +39,6 @@ namespace SpeedLimitApi.Repositories
         {
             string path = CreatePath(carSpeeds[0].RegisteredAt);
             var str = JsonSerializer.Serialize(carSpeeds);
-            Console.WriteLine(str[0]);
             str = str.Remove(0, 1);
             Console.WriteLine(str[0]);
             str = str.Remove(str.Length - 1, 1);
@@ -72,7 +71,6 @@ namespace SpeedLimitApi.Repositories
         {
             string path = CreatePath(date);
             var carSpeeds = new List<CarSpeed>();
-
             using (StreamReader stream = new StreamReader(path))
             {
                 string str = "[" + stream.ReadToEnd() + "]";

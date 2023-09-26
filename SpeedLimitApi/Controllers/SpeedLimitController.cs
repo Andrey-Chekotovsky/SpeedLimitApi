@@ -18,6 +18,10 @@ namespace SpeedLimitApi.Controllers
             timer.Start();
             timer.Elapsed += OnTimedEvent;
         }
+        public void addAndSort()
+        {
+
+        }
         private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             Console.WriteLine(":)");
@@ -44,7 +48,7 @@ namespace SpeedLimitApi.Controllers
             catch (FormatException ex) {
                 JsonSerializer.Serialize(new InvalidDataException("Invalid date: " + ex.Message));
             }
-            if (speed < 0 && speed > 1000) {
+            if (speed < 0 || speed > 1000) {
                 return JsonSerializer.Serialize(
                     new InvalidDataException("Speed of car couldn't be less than 0 or greater than 1000"));
             }
