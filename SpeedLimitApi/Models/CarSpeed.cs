@@ -18,8 +18,7 @@ namespace SpeedLimitApi.Models
         [NonSerialized]
         public static readonly int Size = 205; 
         public CarSpeed()
-        {
-}
+        {}
         public CarSpeed(float speed)
         {
             this.speed = speed;

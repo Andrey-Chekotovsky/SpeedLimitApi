@@ -30,7 +30,6 @@ namespace SpeedLimitApi.Controllers
         }
         private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            Console.WriteLine(":)");
             addCarSpeeds();
         }
         [Route("getSpeedLimitIntruders")]
@@ -44,13 +43,20 @@ namespace SpeedLimitApi.Controllers
                 date = DateOnly.Parse(strDate);
             }
             catch (FormatException ex) {
-                JsonSerializer.Serialize(new InvalidDataException("Invalid date: " + ex.Message));
+                JsonSerializer.Serialize(new ApiException("Invalid date: " + ex.Message));
             }
             if (speed < 0 || speed > 1000) {
                 return JsonSerializer.Serialize(
-                    new InvalidDataException("Speed of car couldn't be less than 0 or greater than 1000"));
+                    new ApiException("Speed of car couldn't be less than 0 or greater than 1000"));
             }
-            return JsonSerializer.Serialize(carSpeedRepository.GetCarSpeeds(date, speed));
+            try
+            {
+                return JsonSerializer.Serialize(carSpeedRepository.GetCarSpeeds(date, speed));
+            }
+            catch (FileNotFoundException ex)
+            {
+                return JsonSerializer.Serialize(new ApiException("There is no data about this date: " + ex.Message));
+            }
         }
         [Route("getMinMax")]
         [HttpGet]
@@ -63,14 +69,14 @@ namespace SpeedLimitApi.Controllers
                 date = DateOnly.Parse(strDate);
             }
             catch (FormatException ex){
-                JsonSerializer.Serialize(new InvalidDataException("Invalid date: " + ex.Message));
+                JsonSerializer.Serialize(new ApiException("Invalid date: " + ex.Message));
             }
             try{
                 var rezult = carSpeedRepository.GetMinMaxCarSpeed(date);
                 return JsonSerializer.Serialize(new List<CarSpeed> { rezult.min, rezult.max });
             }
             catch (FileNotFoundException ex) {
-                return JsonSerializer.Serialize(new NoDateException("There is no data about this date: " + ex.Message));
+                return JsonSerializer.Serialize(new ApiException("There is no data about this date: " + ex.Message));
             }
         }
         [Route("PostCarSpeed")]
