@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedLimitApi.Test", "Speed
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpidLimitApi.Benchmark", "SpidLimitApi.Benchmark\SpidLimitApi.Benchmark.csproj", "{A979741F-5D3A-47BD-A567-53C300B12B85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedLimitApiUser", "..\SpeedLimitApiUser\SpeedLimitApiUser\SpeedLimitApiUser.csproj", "{ED4D9302-09BD-4F3C-9179-27ADD9B02643}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedLimitApiUser", "SpeedLimitApiUser\SpeedLimitApiUser.csproj", "{CA9676A7-ED02-4EAC-A8D2-309064D5C025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{A979741F-5D3A-47BD-A567-53C300B12B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A979741F-5D3A-47BD-A567-53C300B12B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A979741F-5D3A-47BD-A567-53C300B12B85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED4D9302-09BD-4F3C-9179-27ADD9B02643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED4D9302-09BD-4F3C-9179-27ADD9B02643}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED4D9302-09BD-4F3C-9179-27ADD9B02643}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED4D9302-09BD-4F3C-9179-27ADD9B02643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA9676A7-ED02-4EAC-A8D2-309064D5C025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9676A7-ED02-4EAC-A8D2-309064D5C025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9676A7-ED02-4EAC-A8D2-309064D5C025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9676A7-ED02-4EAC-A8D2-309064D5C025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
