@@ -14,11 +14,16 @@ namespace SpeedLimitApi.Controllers
         private System.Timers.Timer timer = new System.Timers.Timer(10000);
         private static List<CarSpeed> carSpeeds = new List<CarSpeed>();
         private static int day;
-        public SpeedLimitController()
+        private int minActiveTime;
+        private int maxActiveTime;
+        public SpeedLimitController(IConfiguration configuration)
         {
             timer.Start();
             timer.Elapsed += OnTimedEvent;
             day = DateTime.Now.Day;
+            minActiveTime = configuration.GetValue<int>("TimeRestrictions:MinTime");
+            maxActiveTime = configuration.GetValue<int>("TimeRestrictions:MaxTime");
+            Console.WriteLine(minActiveTime + maxActiveTime);
         }
         public static  void addCarSpeeds()
         {
@@ -37,6 +42,10 @@ namespace SpeedLimitApi.Controllers
         public string getSpeedLimitIntruders([FromQuery(Name = "date")] string strDate,
             [FromQuery(Name = "speed")] float speed)
         {
+            if (DateTime.Now.Hour < minActiveTime || DateTime.Now.Hour > maxActiveTime)
+            {
+                return JsonSerializer.Serialize(new ApiException("Api accesseble between " + minActiveTime + " and " + maxActiveTime + " hours"));
+            }
             DateOnly date;
             addCarSpeeds();
             try {
@@ -62,6 +71,10 @@ namespace SpeedLimitApi.Controllers
         [HttpGet]
         public string GetMinAndMax([FromQuery(Name = "date")] string strDate)
         {
+            if (DateTime.Now.Hour < minActiveTime || DateTime.Now.Hour > maxActiveTime)
+            {
+                JsonSerializer.Serialize(new ApiException("Api accesseble between " + minActiveTime + " and " + maxActiveTime + " hours"));
+            }
             DateOnly date;
             addCarSpeeds();
             try

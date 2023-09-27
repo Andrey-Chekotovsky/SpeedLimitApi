@@ -13,7 +13,7 @@ namespace SpeedLimitApiUser
             while (true)
             {
                 int num = int.Parse(Console.ReadLine());
-                if (num < min && num > max) {
+                if (num < min || num > max) {
                     Console.WriteLine("Number sshould be less than " + min + " and greater than " + max);
                 }
                 else {
